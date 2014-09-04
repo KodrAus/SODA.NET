@@ -41,17 +41,17 @@ namespace SODA.Utilities
         /// Create a url string suitable for interacting with resource metadata on the specified Socrata host.
         /// </summary>
         /// <param name="socrataHost">The Socrata host to target.</param>
-        /// <param name="resourceId">The identifier (4x4) for a resource on the Socrata host to target.</param>
+        /// <param name="path">The identifier (4x4) for a resource on the Socrata host to target.</param>
         /// <returns>A SODA-compatible Url for the target Socrata host.</returns>
-        private static string metadataUrl(string socrataHost, string resourceId = null)
+        private static string metadataUrl(string socrataHost, string path = null)
         {
             string httpsHost = enforceHttps(socrataHost);
 
             string url = String.Format("{0}/views", httpsHost);
 
-            if(!String.IsNullOrEmpty(resourceId))
+            if(!String.IsNullOrEmpty(path))
             {
-                url = String.Format("{0}/{1}", url, resourceId);
+                url = String.Format("{0}/{1}", url, path);
             }
 
             return url;
@@ -62,8 +62,13 @@ namespace SODA.Utilities
         /// </summary>
         /// <param name="socrataHost">The Socrata host to target.</param>
         /// <param name="resourceId">The identifier (4x4) for a resource on the Socrata host to target.</param>
+        /// <param name="path">Additional [optional] endpoint path.</param>
         /// <returns>A Uri pointing to resource metadata for the specified Socrata host and resource identifier.</returns>
-        public static Uri ForMetadata(string socrataHost, string resourceId)
+        /// <remarks>
+        /// An example of an additional endpoint path would be "columns.json", resulting in a url like
+        /// http://socrata.host.com/views/four-four/columns.json.
+        /// </remarks>
+        public static Uri ForMetadata(string socrataHost, string resourceId, string path = null)
         {
             if (String.IsNullOrEmpty(socrataHost))
                 throw new ArgumentException("socrataHost", "Must provide a Socrata host to target.");
@@ -71,7 +76,9 @@ namespace SODA.Utilities
             if (FourByFour.IsNotValid(resourceId))
                 throw new ArgumentOutOfRangeException("resourceId", "The provided resourceId is not a valid Socrata (4x4) resource identifier.");
 
-            string url = metadataUrl(socrataHost, resourceId);
+            path = String.IsNullOrEmpty(path) ? resourceId : String.Format("{0}/{1}", resourceId, path);
+
+            string url = metadataUrl(socrataHost, path);
 
             return new Uri(url);
         }
