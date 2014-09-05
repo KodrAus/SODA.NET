@@ -72,6 +72,7 @@
     <Compile Include="FourByFourTests.cs" />
     <Compile Include="ResourceMetadataTests.cs" />
     <Compile Include="ResourceTests.cs" />
+    <Compile Include="WebExceptionExtensionsTests.cs" />
     <Compile Include="SodaClientTests.cs">
       <SubType>Code</SubType>
     </Compile>
