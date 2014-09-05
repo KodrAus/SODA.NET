@@ -224,7 +224,7 @@ namespace SODA
             if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(password))
                 throw new InvalidOperationException("Write operations require an authenticated client.");
 
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
+            string json = payload.ToJsonString();
 
             return Upsert(json, SodaDataFormat.JSON, resourceId);
         }
@@ -357,7 +357,7 @@ namespace SODA
             if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(password))
                 throw new InvalidOperationException("Write operations require an authenticated client.");
 
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
+            string json = payload.ToJsonString();
 
             return Replace(json, SodaDataFormat.JSON, resourceId);
         }

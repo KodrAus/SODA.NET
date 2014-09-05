@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using SODA.Utilities;
 
 namespace SODA
 {
@@ -112,7 +113,7 @@ namespace SODA
                     case SodaDataFormat.JSON:
                         try
                         {
-                            result = Newtonsoft.Json.JsonConvert.DeserializeObject<TResult>(response);
+                            result = response.deserializeJsonTo<TResult>();
                         }
                         catch (Newtonsoft.Json.JsonException jex)
                         {

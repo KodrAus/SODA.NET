@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
+using SODA.Utilities;
 
 namespace SODA.Models
 {
@@ -51,7 +51,7 @@ namespace SODA.Models
 
             try
             {
-                other = JsonConvert.DeserializeObject<HumanAddress>(humanAddressJson);
+                other = humanAddressJson.deserializeJsonTo<HumanAddress>();
             }
             catch
             {
