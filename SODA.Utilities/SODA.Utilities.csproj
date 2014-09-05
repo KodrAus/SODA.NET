@@ -62,7 +62,9 @@
     <Compile Include="EwsClient.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Extensions.cs" />
+    <Compile Include="DataRowExtensions.cs" />
+    <Compile Include="ObjectExtensions.cs" />
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="IEwsClient.cs" />
     <Compile Include="SimpleFileLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
