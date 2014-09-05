@@ -134,7 +134,7 @@ namespace SODA.Utilities.Tests
             string value = "TypeGuessRows";
 
             string expected = "0";
-            string actual = Registry.GetValue(key, value, "-1").ToString();
+            string actual = (Registry.GetValue(key, value, "-1") ?? String.Empty).ToString();
 
             Assert.AreEqual(expected, actual, "The registry key {0}\\{1} should be set to {2} for more accurate Excel column datatype interpretations.", key, value, expected);
         }
